@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import App from "@/components/band/App";
 import TextType from "@/components/band/TextType";
+import { div } from "framer-motion/client";
 
 const skills = [
   "HTML",
@@ -49,71 +50,65 @@ export default function Hero({ showApp }: HeroProps) {
   }, []);
 
   return (
-    <section
-      id="home"
-      className="px-6 md:pl-[120px] md:pr-[60px]"
+  <section
+    id="home"
+    className="px-6 md:pl-[120px] md:pr-[60px]"
+    style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      position: "relative",
+      overflow: "hidden",
+    }}
+  >
+    {/* APP LAYER */}
+    <div
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        position: "relative",
-        overflow: "hidden",
+        position: "absolute",
+        inset: 0,
+        zIndex: 40,
+        pointerEvents: showApp ? "auto" : "none",
       }}
     >
-      {/* APP LAYER */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 40,
-          pointerEvents: showApp ? "auto" : "none",
-        }}
-      >
-        {showApp && <App />}
-      </div>
+     {/* {showApp && <App />}*/}
+    </div>
 
-      {/* OWNER IMAGE */}
-<motion.div
-  initial={{ opacity: 0, x: 80 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  className="absolute right-10 top-1/2 -translate-y-1/2 hidden md:block z-20"
->
-</motion.div>
-
-      {/* TEXT */}
-      <div
-        className="md:max-w-[600px]"
-        style={{
-          width: "100%",
-          position: "relative",
-          zIndex: 5,
+    {/* TEXT */}
+    <div
+      className="md:max-w-[600px]"
+      style={{
+        width: "100%",
+        position: "relative",
+        zIndex: 5,
+      }}
+    >
+      {/* LABEL */}
+      <motion.div
+        initial={false}
+        animate={
+          startAnim
+            ? { opacity: 1, y: 0, filter: "blur(0px)" }
+            : { opacity: 0, y: 30, filter: "blur(12px)" }
+        }
+        transition={{
+          duration: 0.9,
+          ease: [0.22, 1, 0.36, 1],
         }}
+        style={{ marginBottom: 20 }}
       >
-        {/* LABEL */}
-        <motion.div
-          initial={false}
-          animate={
-            startAnim
-              ? { opacity: 1, y: 0, filter: "blur(0px)" }
-              : { opacity: 0, y: 30, filter: "blur(12px)" }
-          }
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          style={{ marginBottom: 20 }}
+        <span
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 12,
+            color: "var(--text-muted)",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+          }}
         >
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: 12,
-              color: "var(--text-muted)",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-            }}
-          >
-            ✦ Welcome To My Portfolio
-          </span>
-        </motion.div>
+          ✦ Welcome To My Portfolio
+        </span>
+      </motion.div>
 
         {/* HEADING */}
         <div>

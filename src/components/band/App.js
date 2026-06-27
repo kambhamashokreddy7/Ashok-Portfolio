@@ -21,8 +21,8 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-const GLTF_PATH = '/assets/kartu.glb';
-const TEXTURE_PATH = '/assets/bandd.png';
+const GLTF_PATH = '/assets/ashok.jpg';
+const TEXTURE_PATH = '/assets/black.png';
 
 useGLTF.preload(GLTF_PATH);
 useTexture.preload(TEXTURE_PATH);
@@ -277,7 +277,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
           depthTest={false}
           resolution={[width, height]}
           useMap
-          map={texture}
+          //map={texture}
           repeat={[-4, 1]}
           lineWidth={1}
         />
