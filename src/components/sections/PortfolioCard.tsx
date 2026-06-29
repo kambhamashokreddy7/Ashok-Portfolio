@@ -47,7 +47,19 @@ export default function PortfolioCard({
     >
       <div className="w-full h-36 rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] mb-3">
         {image ? (
-          null
+          <div className="w-full h-36 rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] mb-3">
+
+  {image ? (
+    <img
+      src={image}
+      alt={title}
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full bg-white/[0.03]" />
+  )}
+
+</div>
         ) : (
           <div className="w-full h-full bg-white/[0.03]" />
         )}

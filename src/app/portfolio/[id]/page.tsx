@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { supabase } from '@/lib/supabase'
+import { projects } from "@/data/portfolioData"
 import {
   ArrowLeft,
   ChevronLeft,
@@ -28,8 +28,8 @@ export default function PortfolioDetailPage() {
     title: '',
     description: '',
     technologies: '',
-    key_features: '',
-    image_url: '',
+    features: [],
+    image: '',
     image_urls: [],
     live_url: '',
     github_url: '',
@@ -42,25 +42,25 @@ export default function PortfolioDetailPage() {
     fetchProject()
   }, [])
 
-  const fetchProject = async () => {
-    const { data } = await supabase
-      .from('projects')
-      .select('*')
-      .eq('id', id)
-      .single()
+ const fetchProject = () => {
 
-    if (data) {
-      setProject(data)
-    }
+  const project = projects.find(
+    (item) => item.id.toString() === id
+  )
+
+  if (project) {
+    setProject(project)
   }
 
-  const tech = (project?.technologies || '')
-    .split(',')
-    .filter((t: string) => t.trim() !== '')
+}
 
-  const features = (project?.key_features || '')
-    .split(',')
-    .filter((f: string) => f.trim() !== '')
+  const tech = Array.isArray(project?.technologies)
+  ? project.technologies
+  : (project?.technologies || '')
+      .split(',')
+      .filter((t: string) => t.trim() !== '')
+      
+  const features = project?.features || []
 
   const galleryImages =
     project?.image_urls && Array.isArray(project.image_urls)

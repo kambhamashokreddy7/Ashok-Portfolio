@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Plus, Trash2, Pencil, X, Upload } from "lucide-react";
 import Sidebar from "@/app/admin/Sidebar";
-import { supabase } from "@/lib/supabase";
 import Swal from "sweetalert2";
 
 export default function CertificatesPage() {
@@ -20,9 +19,16 @@ export default function CertificatesPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetchCertificates();
 
-    const channel = supabase
+  const saved = localStorage.getItem("certificates");
+
+  if(saved){
+    setCertificates(JSON.parse(saved));
+  }
+
+  setLoading(false);
+
+}, []);
       .channel("certificates-realtime")
       .on(
         "postgres_changes",
@@ -42,17 +48,6 @@ export default function CertificatesPage() {
     };
   }, []);
 
-  const fetchCertificates = async () => {
-  const { data } = await supabase
-    .from("certificates")
-    .select("*")
-    .order("created_at", {
-      ascending: true,
-    });
-
-  setCertificates(data || []);
-  setLoading(false);
-};
 
   const resetForm = () => {
     setTitle("");
@@ -70,52 +65,58 @@ export default function CertificatesPage() {
     setPreview(URL.createObjectURL(file));
   };
 
-  const handleSave = async () => {
-    if (!title.trim()) return;
+const handleSave = async () => {
 
-    setSaving(true);
+  if (!title.trim()) return;
 
-    let imageUrl = preview;
+  let imageUrl = preview;
 
-    if (image) {
-      const fileName = `certificate-${Date.now()}-${image.name}`;
+  if (image) {
+    imageUrl = URL.createObjectURL(image);
+  }
 
-      const { error: uploadError } = await supabase.storage
-        .from("certificates")
-        .upload(fileName, image);
+  let updated;
 
-      if (!uploadError) {
-        const { data } = supabase.storage
-          .from("certificates")
-          .getPublicUrl(fileName);
 
-        imageUrl = data.publicUrl;
+  if (editId) {
+
+    updated = certificates.map(item =>
+      item.id === editId
+      ? {
+          ...item,
+          title,
+          image_url: imageUrl
+        }
+      : item
+    );
+
+  } else {
+
+    updated = [
+      ...certificates,
+      {
+        id: Date.now(),
+        title,
+        image_url: imageUrl,
+        created_at: new Date()
       }
-    }
+    ];
 
-    if (editId) {
-      await supabase
-        .from("certificates")
-        .update({
-          title,
-          image_url: imageUrl,
-        })
-        .eq("id", editId);
-    } else {
-      await supabase.from("certificates").insert([
-        {
-          title,
-          image_url: imageUrl,
-        },
-      ]);
-    }
+  }
 
-    setSaving(false);
-setOpen(false);
-resetForm();
 
-fetchCertificates
-  };
+  setCertificates(updated);
+
+  localStorage.setItem(
+    "certificates",
+    JSON.stringify(updated)
+  );
+
+
+  setOpen(false);
+  resetForm();
+
+};
 
   const handleDelete = async (id: number) => {
     const result = await Swal.fire({
@@ -134,7 +135,16 @@ fetchCertificates
 
     if (!result.isConfirmed) return;
 
-    const { error } = await supabase.from("certificates").delete().eq("id", id);
+    const updated = certificates.filter(
+  (item) => item.id !== id
+);
+
+setCertificates(updated);
+
+localStorage.setItem(
+  "certificates",
+  JSON.stringify(updated)
+);
 
     if (!error) {
       setCertificates((prev) => prev.filter((item) => item.id !== id));

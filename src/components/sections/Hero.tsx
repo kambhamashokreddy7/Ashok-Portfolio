@@ -6,6 +6,7 @@ import App from "@/components/band/App";
 import TextType from "@/components/band/TextType";
 import { div } from "framer-motion/client";
 
+
 const skills = [
   "HTML",
   "CSS",
@@ -71,18 +72,19 @@ export default function Hero({ showApp }: HeroProps) {
         pointerEvents: showApp ? "auto" : "none",
       }}
     >
-     {/* {showApp && <App />}*/}
+      {/*{showApp && <App />}*/}
     </div>
 
-    {/* TEXT */}
-    <div
-      className="md:max-w-[600px]"
-      style={{
-        width: "100%",
-        position: "relative",
-        zIndex: 5,
-      }}
-    >
+    {/* HERO CONTENT */}
+<div
+  className="md:max-w-[600px]"
+  style={{
+    width: "100%",
+    position: "relative",
+    zIndex: 5,
+  }}
+>
+    
       {/* LABEL */}
       <motion.div
         initial={false}
@@ -297,6 +299,17 @@ export default function Hero({ showApp }: HeroProps) {
           </span>
         </motion.div>
       </div>
+      {/* PROFILE IMAGE */}
+<div
+  style={{
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: "40px",
+  }}
+>
+</div>
       {/* SCROLL INDICATOR */}
       <motion.div
         initial={false}
@@ -366,6 +379,9 @@ export default function Hero({ showApp }: HeroProps) {
   </motion.div>
 </motion.div>
       </motion.div>
+
+
     </section>
   );
 }
+      

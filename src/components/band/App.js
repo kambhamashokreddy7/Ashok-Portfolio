@@ -21,7 +21,7 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-const GLTF_PATH = '/assets/ashok.jpg';
+const GLTF_PATH = '/assets/as.jpeg';
 const TEXTURE_PATH = '/assets/black.png';
 
 useGLTF.preload(GLTF_PATH);

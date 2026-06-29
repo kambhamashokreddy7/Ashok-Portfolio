@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { certificates } from "@/data/certificateData"
 import {
   X,
   ChevronDown,
@@ -24,6 +25,7 @@ export default function PortfolioShowcase() {
     techStacks,
     loading,
   } = usePortfolio()
+  console.log("CERTIFICATES:", certificates)
 
   const [activeTab, setActiveTab] =
     useState('projects')
@@ -191,7 +193,7 @@ export default function PortfolioShowcase() {
                               description={
                                 item.description
                               }
-                              image={item.image_url}
+                              image={item.image}
                               live_url={item.live_url}
                               id={item.id}
                             />
@@ -277,44 +279,54 @@ export default function PortfolioShowcase() {
             {/* CERTIFICATES */}
             {activeTab === 'certificates' && (
               <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 px-1">
-                {!loading &&
-                  certificates.map((item, i) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{
-                        opacity: 0,
-                        y: 25,
-                        scale: 0.96,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                      }}
-                      transition={{
-                        duration: 0.5,
-                        delay: i * 0.04,
-                      }}
-                      whileHover={{ y: -4 }}
-                      onClick={() => {
-                        setPreviewImage(
-                          item.image_url
-                        )
-                        setPreviewOpen(true)
-                      }}
-                      className="group cursor-pointer rounded-[26px] border border-white/10 bg-white/5 p-4 backdrop-blur-xl"
-                    >
-                      <div className="rounded-2xl overflow-hidden border border-white/10 h-56">
-                        
-                      </div>
+                {!loading && certificates.map((item, i) => (
+  <motion.div
+    key={item.id}
+    initial={{
+      opacity: 0,
+      y: 25,
+      scale: 0.96,
+    }}
+    whileInView={{
+      opacity: 1,
+      y: 0,
+      scale: 1,
+    }}
+    transition={{
+      duration: 0.5,
+      delay: i * 0.04,
+    }}
+    whileHover={{ y: -4 }}
+    onClick={() => {
+      setPreviewImage(item.image)
+      setPreviewOpen(true)
+    }}
+    className="group cursor-pointer rounded-[26px] border border-white/10 bg-white/5 p-4 backdrop-blur-xl"
+  >
 
-                      <h3 className="mt-4 text-[15px] font-semibold text-center text-white/90">
-                        {item.title}
-                      </h3>
-                    </motion.div>
-                  ))}
+    <div className="rounded-2xl overflow-hidden border border-white/10 h-56">
+
+      {item.image ? (
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <div className="w-full h-full bg-white/10" />
+      )}
+
+    </div>
+
+
+    <h3 className="mt-4 text-[15px] font-semibold text-center text-white/90">
+      {item.title}
+    </h3>
+
+  </motion.div>
+))}
               </div>
-            )}
+)}
 
             {/* TECH STACK */}
             {/* TECH STACK */}

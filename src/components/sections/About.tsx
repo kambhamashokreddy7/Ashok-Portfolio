@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { Code, Award, Globe, FileText, ArrowUpRight } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 
 /* ================== ANIMATION ================== */
 
