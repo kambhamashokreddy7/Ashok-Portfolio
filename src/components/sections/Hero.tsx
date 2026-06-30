@@ -320,8 +320,8 @@ export default function Hero({ showApp }: HeroProps) {
     }}
     src="/assets/ashokreddy.jpeg"
     alt="Ashok Reddy"
-    className="w-48 h-50 sm:w-64 sm:h-64 rounded-full object-cover border border-white/20 shadow-xl"
-  />
+    className="w-[220px] h-[220px] md:w-[320px] md:h-[320px] rounded-full object-cover border border-white/20 shadow-xl"
+    />
 </div>
       {/* SCROLL INDICATOR */}
       <motion.div

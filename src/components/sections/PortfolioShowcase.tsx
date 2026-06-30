@@ -83,9 +83,9 @@ export default function PortfolioShowcase() {
       </AnimatePresence>
 
       <section
-        id="portfolio"
-        className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-24 text-white"
-      >
+  id="portfolio"
+  className="w-full max-w-[1450px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20 pt-24 pb-24 text-white"
+>
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 45 }}

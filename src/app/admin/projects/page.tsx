@@ -68,7 +68,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] text-white overflow-visible">
       {/* SIDEBAR */}
       <div className="fixed left-0 top-0 h-screen z-40">
         <Sidebar />
