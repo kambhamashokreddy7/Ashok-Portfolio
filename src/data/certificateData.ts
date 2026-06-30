@@ -22,6 +22,6 @@ export const certificates = [
     ],
 
     image:
-      "/assets/intern-cert.jpeg"
+      "/assets/Intern cert.jpeg"
   }
 ]
