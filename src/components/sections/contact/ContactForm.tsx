@@ -43,9 +43,9 @@ const fieldVariants: Variants = {
 const socialLinks = [
   {
     title: 'Instagram',
-    user: '@instagram',
+    user: '@ashokreddyy.k',
     icon: FaInstagram,
-    link: '#',
+    link: 'https://www.instagram.com/ashokreddyy.k/',
   },
   {
     title: 'Youtube',
@@ -55,7 +55,7 @@ const socialLinks = [
   },
   {
     title: 'Github',
-    user: '@github',
+    user: '@kambhamashokreddy7',
     icon: FaGithub,
     link: 'https://github.com/kambhamashokreddy7',
   },
@@ -233,7 +233,7 @@ export default function ContactForm() {
 
         {/* LINKEDIN */} 
         <motion.a
-          href="https://www.linkedin.com/feed/"  
+          href="https://www.linkedin.com/in/ashok-reddy-kambham-52951438b/"  
           target="_blank"
           rel="noopener noreferrer"
           variants={fieldVariants}

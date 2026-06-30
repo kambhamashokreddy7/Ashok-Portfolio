@@ -32,7 +32,7 @@ const itemVariants: Variants = {
 }
 
 export default function CommentsSection() {
-  const { comments, loading } = useComments()
+  const { comments, loading, addComment, likeComment } = useComments()
   const [name, setName] = useState('')
   const [comment, setComment] = useState('')
   const [image, setImage] = useState<File | null>(null)
@@ -49,8 +49,22 @@ export default function CommentsSection() {
   }
 
   const handleSubmit = async () => {
-  alert("Comments are currently disabled.");
-}
+  if (!name || !comment) {
+    alert("Please enter name and comment");
+    return;
+  }
+
+  await addComment({
+    name,
+    comment,
+    image,
+  });
+
+  setName("");
+  setComment("");
+  setImage(null);
+  setPreview(null);
+};
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
@@ -208,12 +222,19 @@ export default function CommentsSection() {
                     <p className="text-[12px] md:text-[13px] text-white/55">
                       {item.comment}
                     </p>
+                    {item.image && (
+  <img
+    src={URL.createObjectURL(item.image)}
+    alt="comment image"
+    className="mt-3 rounded-xl h-32 w-full object-cover"
+  />
+)}
 
 
                   </div>
 
                   <button
-                    onClick={() => {}}
+  onClick={() => likeComment(item.id)}
                     className="flex items-center gap-1 text-[11px] text-white/40 hover:text-white transition-colors"
                   >
                     <Heart size={13} />

@@ -301,7 +301,7 @@ export default function Hero({ showApp }: HeroProps) {
       </div>
       {/* PROFILE IMAGE */}
 <div
-  className="flex-1 flex justify-center items-center pl-10 min-w-[280px]"
+  className="flex-1 flex justify-center items-center pl-10 min-w-[222px]"
 >
 <motion.img
 
