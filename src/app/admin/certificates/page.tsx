@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Plus, Trash2, Pencil, X, Upload } from "lucide-react";
 import Sidebar from "@/app/admin/Sidebar";
+import { supabase } from "@/lib/supabase";
 import Swal from "sweetalert2";
 
 export default function CertificatesPage() {
@@ -29,24 +30,9 @@ export default function CertificatesPage() {
   setLoading(false);
 
 }, []);
-      .channel("certificates-realtime")
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "certificates",
-        },
-        () => {
-          fetchCertificates();
-        },
-      )
-      .subscribe();
+useEffect(() => {
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+}, []);
 
 
   const resetForm = () => {
@@ -145,28 +131,19 @@ localStorage.setItem(
   "certificates",
   JSON.stringify(updated)
 );
+setCertificates((prev) =>
+  prev.filter((item) => item.id !== id)
+);
 
-    if (!error) {
-      setCertificates((prev) => prev.filter((item) => item.id !== id));
-
-      Swal.fire({
-        title: "Deleted!",
-        text: "Certificate berhasil dihapus.",
-        icon: "success",
-        timer: 1800,
-        showConfirmButton: false,
-        background: "#111",
-        color: "#fff",
-      });
-    } else {
-      Swal.fire({
-        title: "Failed",
-        text: "Gagal menghapus certificate.",
-        icon: "error",
-        background: "#111",
-        color: "#fff",
-      });
-    }
+Swal.fire({
+  title: "Deleted!",
+  text: "Certificate berhasil dihapus.",
+  icon: "success",
+  timer: 1800,
+  showConfirmButton: false,
+  background: "#111",
+  color: "#fff",
+});
   };
 
   const handleEdit = (item: any) => {
