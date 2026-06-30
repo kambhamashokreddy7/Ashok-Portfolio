@@ -1,5 +1,6 @@
 'use client'
-
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, Variants } from 'framer-motion'
 import {
   Send,
@@ -66,7 +67,42 @@ const socialLinks = [
   },
 ]
 
+const SERVICE_ID = "service_tmplfxc";
+const TEMPLATE_ID = "template_rf1ag8o";
+const PUBLIC_KEY = "zWn_wNT7KVrFIP9kS";
+
 export default function ContactForm() {
+  const form = useRef<HTMLFormElement>(null);
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    setLoading(true);
+    setStatus("");
+
+    try {
+      await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        form.current,
+        PUBLIC_KEY
+      );
+
+      setStatus("✅ Message sent successfully!");
+      form.current.reset();
+    } catch (error) {
+      console.error(error);
+      setStatus("❌ Failed to send message.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -40 }}
@@ -94,7 +130,7 @@ export default function ContactForm() {
       </motion.div>
 
       {/* FORM */}
-      <div className="space-y-4">
+      <form ref={form} onSubmit={sendEmail} className="space-y-4">
         {/* NAME */}
         <motion.div
           variants={fieldVariants}
@@ -107,9 +143,11 @@ export default function ContactForm() {
             <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
 
             <input
-              placeholder="Your Name"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
-            />
+  name="user_name"
+  type="text"
+  placeholder="Your Name"
+  className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+/>
           </div>
         </motion.div>
 
@@ -125,9 +163,11 @@ export default function ContactForm() {
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
 
             <input
-              placeholder="Your Email"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
-            />
+  name="user_email"
+  type="email"
+  placeholder="Your Email"
+  className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+/>
           </div>
         </motion.div>
 
@@ -143,31 +183,40 @@ export default function ContactForm() {
             <MessageSquare className="absolute left-4 top-5 text-white/40" />
 
             <textarea
-              rows={5}
-              placeholder="Your Message"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none resize-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
-            />
+  name="message"
+  placeholder="Your Message"
+  rows={5}
+  className="w-full rounded-2xl border border-white/15 bg-black/20 px-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+/>
           </div>
         </motion.div>
 
         {/* BUTTON */}
-        <motion.button
-          variants={fieldVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false }}
-          transition={{ delay: 0.28 }}
-          whileHover={{
-            scale: 1.06,
-            transition: { duration: 0.12 },
-          }}
-          whileTap={{ scale: 0.97 }}
-          className="w-full rounded-2xl py-4 bg-white/10 border border-white/10 flex items-center justify-center gap-2"
-        >
-          <Send size={16} />
-          Send Message
-        </motion.button>
-      </div>
+<motion.button
+  type="submit"
+  disabled={loading}
+  variants={fieldVariants}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: false }}
+  transition={{ delay: 0.28 }}
+  whileHover={{
+    scale: 1.06,
+    transition: { duration: 0.12 },
+  }}
+  whileTap={{ scale: 0.97 }}
+  className="w-full rounded-2xl py-4 bg-white/10 border border-white/10 flex items-center justify-center gap-2"
+>
+  <Send size={16} />
+  {loading ? "Sending..." : "Send Message"}
+</motion.button>
+
+{status && (
+  <p className="mt-3 text-sm">
+    {status}
+  </p>
+)}
+      </form>
 
       {/* SOCIAL */}
       <div className="border-t border-white/10 pt-5 mt-6">
