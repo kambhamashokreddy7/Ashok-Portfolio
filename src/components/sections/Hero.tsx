@@ -60,7 +60,7 @@ export default function Hero({ showApp }: HeroProps) {
       alignItems: "center",
       justifyContent: "flex-start",
       position: "relative",
-      overflow: "hidden",
+      overflow: "visible",
     }}
   >
     {/* APP LAYER */}
@@ -301,55 +301,31 @@ export default function Hero({ showApp }: HeroProps) {
       </div>
       {/* PROFILE IMAGE */}
 <div
-  className="flex-1 flex justify-center items-center pl-10 min-w-[222px]"
+  className="flex-1 flex justify-center items-center mt-10 md:mt-0 md:pl-10"
 >
-<motion.img
-
+  <motion.img
     initial={{
-
       opacity: 0,
-
       scale: 0.8,
-
       x: 50,
-
     }}
-
     animate={
-
       startAnim
-
         ? {
-
             opacity: 1,
-
             scale: 1,
-
             x: 0,
-
           }
-
         : {}
-
     }
-
     transition={{
-
       duration: 0.8,
-
       delay: 0.4,
-
     }}
-
     src="/assets/ashokreddy.jpeg"
-
     alt="Ashok Reddy"
-
-className="w-200px h-100 rounded-full object-cover border border-white/20 shadow-xl"
+    className="w-48 h-48 sm:w-64 sm:h-64 rounded-full object-cover border border-white/20 shadow-xl"
   />
-
-
-
 </div>
       {/* SCROLL INDICATOR */}
       <motion.div
