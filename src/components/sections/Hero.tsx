@@ -309,22 +309,18 @@ export default function Hero({ showApp }: HeroProps) {
       scale: 0.8,
       x: 50,
     }}
-    animate={
-      startAnim
-        ? {
-            opacity: 1,
-            scale: 1,
-            x: 0,
-          }
-        : {}
-    }
+    animate={{
+  opacity: 1,
+  scale: 1,
+  x: 0,
+}}
     transition={{
       duration: 0.8,
       delay: 0.4,
     }}
     src="/assets/ashokreddy.jpeg"
     alt="Ashok Reddy"
-    className="w-48 h-48 sm:w-64 sm:h-64 rounded-full object-cover border border-white/20 shadow-xl"
+    className="w-48 h-50 sm:w-64 sm:h-64 rounded-full object-cover border border-white/20 shadow-xl"
   />
 </div>
       {/* SCROLL INDICATOR */}
