@@ -74,22 +74,9 @@ export default function About() {
   }, []);
 
   const fetchStats = async () => {
-    try {
-      const { count: projects } = await supabase
-        .from("projects")
-        .select("*", { count: "exact", head: true });
-
-      const { count: certificates } = await supabase
-        .from("certificates")
-        .select("*", { count: "exact", head: true });
-
-      setProjectCount(projects || 0);
-      setCertificateCount(certificates || 0);
-    } catch {
-      setProjectCount(0);
-      setCertificateCount(0);
-    }
-  };
+  setProjectCount(1);
+  setCertificateCount(1);
+};
 
   const scrollToPortfolio = () => {
     const el = document.getElementById("portfolio");

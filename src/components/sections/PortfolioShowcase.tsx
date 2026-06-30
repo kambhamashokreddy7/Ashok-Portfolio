@@ -195,7 +195,7 @@ export default function PortfolioShowcase() {
                               }
                               image={item.image}
                               live_url={item.live_url}
-                              id={item.id}
+                              id={String(item.id)}
                             />
                           </motion.div>
                         )

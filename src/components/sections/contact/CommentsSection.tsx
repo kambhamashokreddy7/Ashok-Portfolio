@@ -32,9 +32,7 @@ const itemVariants: Variants = {
 }
 
 export default function CommentsSection() {
-  const { comments, loading, addComment, likeComment } =
-    useComments()
-
+  const { comments, loading } = useComments()
   const [name, setName] = useState('')
   const [comment, setComment] = useState('')
   const [image, setImage] = useState<File | null>(null)
@@ -51,20 +49,8 @@ export default function CommentsSection() {
   }
 
   const handleSubmit = async () => {
-    if (!name.trim() || !comment.trim()) return
-
-    await addComment({
-      name,
-      comment,
-      image,
-    })
-
-    setName('')
-    setComment('')
-    setImage(null)
-    setPreview(null)
-  }
-
+  alert("Comments are currently disabled.");
+}
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
@@ -227,9 +213,7 @@ export default function CommentsSection() {
                   </div>
 
                   <button
-                    onClick={() =>
-                      likeComment(item.id, item.likes)
-                    }
+                    onClick={() => {}}
                     className="flex items-center gap-1 text-[11px] text-white/40 hover:text-white transition-colors"
                   >
                     <Heart size={13} />
