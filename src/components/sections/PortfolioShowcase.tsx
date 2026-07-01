@@ -39,9 +39,20 @@ export default function PortfolioShowcase() {
   const [showAllProjects, setShowAllProjects] =
     useState(false)
 
-  const displayedProjects = showAllProjects
+  const [selectedCategory, setSelectedCategory] =
+    useState("All")
+
+  const filteredProjects =
+  selectedCategory === "All"
     ? projects
-    : projects.slice(0, 3)
+    : projects.filter(
+        (project) =>
+          project.category === selectedCategory
+      )
+
+const displayedProjects = showAllProjects
+  ? filteredProjects
+  : filteredProjects.slice(0, 3)
 
   return (
     <>
@@ -149,6 +160,31 @@ export default function PortfolioShowcase() {
             {/* PROJECTS */}
             {activeTab === 'projects' && (
               <div className="space-y-8">
+                <div className="flex flex-wrap justify-center gap-3">
+  {[
+    "All",
+    "Machine Learning",
+    "Web",
+    "Java",
+    "Data Analytics",
+    "Python",
+  ].map((category) => (
+    <button
+      key={category}
+      onClick={() => {
+        setSelectedCategory(category)
+        setShowAllProjects(false)
+      }}
+      className={`px-5 py-2 rounded-full transition ${
+        selectedCategory === category
+          ? "bg-white text-black"
+          : "bg-white/10 text-white hover:bg-white/20"
+      }`}
+    >
+      {category}
+    </button>
+  ))}
+</div>
                 <motion.div
                   layout
                   transition={{

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import AnimatedBackground from '@/components/AnimatedBackground'
 import Navbar from '@/components/ui/Navbar'
@@ -14,8 +14,10 @@ import WelcomeScreen from '@/components/WelcomeScreen'
 import { hasPlayedIntro, setIntroPlayed } from '@/lib/introState'
 
 export default function Home() {
+
   const [showWelcome, setShowWelcome] = useState(false)
   const [showApp, setShowApp] = useState(true)
+
 
 useEffect(() => {
   const currentHash = window.location.hash
@@ -78,6 +80,7 @@ useEffect(() => {
         <About />
         <PortfolioShowcase />
         <ContactSection />
+  
       </div>
 
       <AnimatePresence>
