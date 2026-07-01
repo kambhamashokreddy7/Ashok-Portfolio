@@ -319,8 +319,8 @@ export default function About() {
                 }}
               >
                 <img
-                  src="/assets/profile-placeholder.png"
-                  alt="Profile"
+                  src="/assets/ashokreddy.jpeg"
+                alt="Profile"
                   style={{
                     width: 240,
                     height: 240,

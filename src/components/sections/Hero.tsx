@@ -52,17 +52,16 @@ export default function Hero({ showApp }: HeroProps) {
 
   return (
   <section
-    id="home"
-    className="px-6 md:pl-[120px] md:pr-[60px]"
-    style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-start",
-      position: "relative",
-      overflow: "visible",
-    }}
-  >
+  id="home"
+  className="flex flex-col md:flex-row px-6 md:pl-[120px] md:pr-[60px]"
+  style={{
+    minHeight: "100vh",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    position: "relative",
+    overflow: "visible",
+  }}
+>
     {/* APP LAYER */}
     <div
       style={{
@@ -77,9 +76,8 @@ export default function Hero({ showApp }: HeroProps) {
 
     {/* HERO CONTENT */}
 <div
-  className="md:max-w-[500px]"
+  className="w-full md:max-w-[500px]"
   style={{
-    width: "100%",
     position: "relative",
     zIndex: 5,
   }}
@@ -300,24 +298,9 @@ export default function Hero({ showApp }: HeroProps) {
         </motion.div>
       </div>
       {/* PROFILE IMAGE */}
-<div
-  className="flex-1 flex justify-center items-center mt-10 md:mt-0 md:pl-10"
->
-  <motion.img
-    initial={{
-      opacity: 0,
-      scale: 0.8,
-      x: 50,
-    }}
-    animate={{
-  opacity: 1,
-  scale: 1,
-  x: 0,
-}}
-    transition={{
-      duration: 0.8,
-      delay: 0.4,
-    }}
+<div className="w-full flex justify-center items-center mt-10 md:mt-0 md:w-1/2">
+
+  <img
     src="/assets/ashokreddy.jpeg"
     alt="Ashok Reddy"
     className="w-[220px] h-[220px] md:w-[320px] md:h-[320px] rounded-full object-cover border border-white/20 shadow-xl"
