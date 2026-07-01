@@ -53,7 +53,8 @@ export default function Hero({ showApp }: HeroProps) {
   return (
   <section
   id="home"
-  className="flex flex-col md:flex-row px-6 md:pl-[120px] md:pr-[60px]"
+  className="flex flex-row px-6 md:pl-[120px] md:pr-[60px]"
+
   style={{
     minHeight: "100vh",
     alignItems: "center",
@@ -76,7 +77,7 @@ export default function Hero({ showApp }: HeroProps) {
 
     {/* HERO CONTENT */}
 <div
-  className="w-full md:max-w-[500px]"
+  className="w-[55%] md:max-w-[500px]"
   style={{
     position: "relative",
     zIndex: 5,
@@ -298,7 +299,7 @@ export default function Hero({ showApp }: HeroProps) {
         </motion.div>
       </div>
       {/* PROFILE IMAGE */}
-<div className="w-full flex justify-center items-center mt-10 md:mt-0 md:w-1/2">
+<div className="w-[45%] flex justify-center items-center mt-0">
 
   <img
     src="/assets/ashokreddy.jpeg"
